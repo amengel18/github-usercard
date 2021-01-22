@@ -4,6 +4,19 @@
     https://api.github.com/users/<your name>
 */
 
+const axios = require('axios');
+
+axios.get('https://api.github.com/users/amengel18')
+  .then(res => {
+    console.log(res.data)
+  })
+  .catch((err) =>{
+    console.log('err')
+  })
+  .finally(() => {
+    console.log('all done')
+  })
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,6 +62,55 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function gitHubCard(object){
+  const card = document.createElement('div');
+  const cardImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const cardName = document.createElement('h3');
+  const userName = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const profileLink = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  cardName.classList.add('name');
+  userName.classList.add('username');
+
+  cardName.textContent = object.name 
+  userName.textContent = object.username 
+  location.textContent = `Location: ${location}`
+  bio.textContent = `Bio: ${object.bio}`
+  cardImg.setAttribute('src', object.avatar_url)
+  profileLink.textContent = object.html_url
+  profile.textContent = object.html_url
+  followers.textContent = `Followers: ${object.followers}`
+  following.textContent = `Following: ${object.following}`
+
+  card.appendChild(cardImg)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(cardName)
+  cardInfo.appendChild(userName)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  profile.appendChild(profileLink)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+
+  document.querySelector('.card').appendChild(card);
+  console.log(profileLink)
+  console.log(profile)
+
+  return card
+}
+
+
+
 
 /*
   List of LS Instructors Github username's:
